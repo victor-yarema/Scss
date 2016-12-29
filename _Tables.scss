@@ -1,0 +1,5 @@
+@mixin TdWidth($width) {
+  min-width: $width;
+  max-width: $width;
+  width: $width;
+}
