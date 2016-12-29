@@ -1,0 +1,31 @@
+@import '../Funcs';
+@import 'Core';
+
+$iconFillPathContentTemplate: "%3cpath fill%3d%22Color%22 d%3d%22Path%22%2f%3e";
+$iconStrokePathContentTemplate: "%3cpath fill%3d%22none%22 stroke%3d%22Color%22 stroke-linecap%3d%22round%22 stroke-width%3d%22StrokeWidth%22 d%3d%22Path%22%2f%3e";
+
+$defaultIconViewBox: (
+  "X": 0,
+  "Y": 0,
+  "Width": 16,
+  "Height": 16,
+);
+
+$defaultIcon: (
+  "Template": $iconFillPathContentTemplate,
+  "Parameters": (),
+  "ViewBox": (),
+);
+
+@mixin BgIconSimple($icon, $color) {
+  $icon: map-merge($defaultIcon, $icon);
+  $path: map-get($icon, "Path");
+  $viewBox: map-get($icon, "ViewBox");
+  $viewBox: map-merge($defaultIconViewBox, $viewBox);
+  $parameters: map-get($icon, "Parameters");
+  $template: map-get($icon, "Template");
+  @each $searchStr, $replaceStr in $parameters {
+    $template: str-replace($template, "#{$searchStr}", "#{$replaceStr}");
+  }
+  @include BgIconColored($template, $path, $color, $viewBox);
+}

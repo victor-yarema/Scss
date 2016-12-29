@@ -1,0 +1,35 @@
+@import '../Funcs';
+
+$iconDataUriTemplate: "url('data:image/svg+xml,%3csvg xmlns%3d%22http%3a%2f%2fwww.w3.org%2f2000%2fsvg%22 viewBox%3d%22ViewBoxX ViewBoxY ViewBoxWidth ViewBoxHeight%22%3eContent%3c%2fsvg%3e')";
+
+@function ColorTemplate($template, $color) {
+  $colorEncoded: str-replace("#{$color}", "#", "%23");
+  @return str-replace($template, "Color", $colorEncoded);
+}
+
+@function BgIconDataUri($icon) {
+  $viewBox: map-get($icon, "ViewBox");
+  $template: $iconDataUriTemplate;
+  $template: str-replace($template, "ViewBoxX", map-get($viewBox, "X"));
+  $template: str-replace($template, "ViewBoxY", map-get($viewBox, "Y"));
+  $template: str-replace($template, "ViewBoxWidth", map-get($viewBox, "Width"));
+  $template: str-replace($template, "ViewBoxHeight", map-get($viewBox, "Height"));
+  @return str-replace($template, "Content", map-get($icon, "Content"));
+}
+
+@mixin BgIconContent($icon) {
+  $dataUri: BgIconDataUri($icon);
+  background-image: #{$dataUri};
+  background-repeat: no-repeat;
+}
+
+@mixin BgIconColored($template, $path, $color, $viewBox) {
+  $template: ColorTemplate($template, $color);
+  $content: str-replace($template, "Path", $path);
+  @include BgIconContent(("Content": $content, "ViewBox": $viewBox));
+}
+
+@mixin BgPlacement($rect) {
+  background-position: map-get($rect, "X") map-get($rect, "Y");
+  background-size: map-get($rect, "Width") map-get($rect, "Height");
+}

@@ -1,0 +1,32 @@
+@function str-replace($string, $search, $replace) {
+  $length: str-length($search);
+  $index: str-index($string, $search);
+
+  @if not $index {
+    $index: 0;
+  }
+
+  $slice: $string;
+
+  @while $index != 0 {
+    $newslice: str-slice($slice, 0, $index - 1);
+    $newslice: $newslice + $replace;
+    $slice: $newslice + str-slice($slice, $index + $length);
+    $index: str-index($slice, $search);
+
+    @if not $index {
+      $index: 0;
+    }
+  }
+
+  @return $slice;
+}
+
+@function NewRect($x, $y, $width, $height) {
+  @return (
+    "X": $x,
+    "Y": $y,
+    "Width": $width,
+    "Height": $height,
+  );
+}

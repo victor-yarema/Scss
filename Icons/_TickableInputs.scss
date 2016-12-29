@@ -1,0 +1,35 @@
+@import 'Base';
+
+$iconRadioOuter: (
+  "Path": "M8,0 a8,8,0,1,0,0,16 a8,8,0,1,0,0,-16 z m0,1 a7,7,0,0,1,0,14 a7,7,0,0,1,0,-14",
+);
+$iconRadioInner: (
+  "Path": "M8,4 a4,4,0,1,1,0,8 a4,4,0,1,1,0,-8",
+);
+
+$iconCheckboxOuter: (
+  "Path": "M2,0 a2,2,0,0,0,-2,2 v12 a2,2,0,0,0,2,2 h12 a2,2,0,0,0,2,-2 v-12 a2,2,0,0,0,-2,-2 z M2,1 h12 a1,1,0,0,1,1,1 v12 a1,1,0,0,1,-1,1 h-12 a1,1,0,0,1,-1,-1 v-12 a1,1,0,0,1,1,-1",
+);
+$iconCheckboxInner: (
+  "Template": $iconStrokePathContentTemplate,
+  "Parameters": (
+    "StrokeWidth": "2",
+  ),
+  "Path": "M4,7 L6.5,13 q0.5,1,1,0 l5,-10",
+);
+
+@mixin BgIconRadioOuter($color) {
+  @include BgIconSimple($iconRadioOuter, $color);
+}
+
+@mixin BgIconRadioInner($color) {
+  @include BgIconSimple($iconRadioInner, $color);
+}
+
+@mixin BgIconCheckboxOuter($color) {
+  @include BgIconSimple($iconCheckboxOuter, $color);
+}
+
+@mixin BgIconCheckboxInner($color) {
+  @include BgIconSimple($iconCheckboxInner, $color);
+}

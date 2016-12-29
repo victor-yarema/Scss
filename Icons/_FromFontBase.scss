@@ -1,0 +1,28 @@
+@import '../Funcs';
+@import 'Core';
+
+$iconFromFontContentTemplate: "%3cpath transform%3d%22translate(0,Height) scale(1,-1)%22 fill%3d%22Color%22 d%3d%22Path%22%2f%3e";
+
+$iconFromFontViewBox: (
+  "X": 0,
+  "Y": 64,
+  "Height": 1024,
+);
+
+$defaultIconFromFont: (
+  "ViewBoxWidth": 1024,
+);
+
+@mixin BgIconFromFont($icon, $color) {
+  $template: str-replace($iconFromFontContentTemplate, "Height", map-get($iconFromFontViewBox, "Height"));
+  $icon: map-merge($defaultIconFromFont, $icon);
+  $path: map-get($icon, "Path");
+  $viewBoxWidth: map-get($icon, "ViewBoxWidth");
+  $viewBox: map-merge($iconFromFontViewBox, ("Width": $viewBoxWidth));
+  @include BgIconColored($template, $path, $color, $viewBox);
+}
+
+@mixin BgIconFromFontPlaced($icon, $color, $rect) {
+  @include BgIconFromFont($icon, $color);
+  @include BgPlacement($rect);
+}
