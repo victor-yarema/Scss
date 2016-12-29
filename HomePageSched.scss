@@ -1,0 +1,351 @@
+@import 'Colors';
+@import 'Icons/FromFont';
+@import 'Icons/TickableInputs';
+@import 'Tables';
+
+$ColsBLast: 2;
+$ColsCFirst: $ColsBLast + 1;
+$ColsCLast: 4;
+$ColsDFirst: $ColsCLast + 1;
+$ColsDLastFromBack: 3;
+$ColsELastFromBack: $ColsDLastFromBack - 1;
+
+* {
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  border: 0;
+  table-layout: fixed;
+}
+
+td {
+  padding: 0;
+}
+
+body {
+  font-size: 0.8em;
+  font-family: "Open Sans", Helvetica, "Segoe UI", Arial, sans-serif;
+  font-weight: 400;
+  white-space: nowrap;
+  @include BgIconCalendarPlaced($Color-DoveGray, NewRect(1.4em, 0.7em, 1.28em, 1.28em));
+
+  $headingBoxClassName: headingBox;
+  $contentBoxClassName: contentBox;
+  $sidebarBoxClassName: sidebarBox;
+  $datagridMainClassName: datagridMain;
+
+  .#{$headingBoxClassName}, .#{$contentBoxClassName} {
+    .#{$datagridMainClassName} {
+      tr {
+        &.header {
+          height: 2.6em;
+          font-style: italic;
+          color: $Color-Blumine;
+
+          td {
+            &:nth-child(n+3) {
+              border-bottom: 2px solid $Color-PigeonPost;
+            }
+
+            span {
+              font-size: 1.05em;
+            }
+          }
+        }
+
+        td {
+          border: 0;
+          overflow: hidden;
+
+          &:nth-child(1) {
+            @include TdWidth(3.7em);
+          }
+
+          &:nth-child(2) {
+            @include TdWidth(16.7em);
+            padding: 0 0.6em;
+          }
+
+          &:nth-child(3) {
+            @include TdWidth(10.6em);
+            text-align: center;
+          }
+
+          &:nth-child(4) {
+            @include TdWidth(2.3em);
+            padding: 0 0.8em;
+          }
+
+          &:nth-child(5) {
+            @include TdWidth(11.1em);
+            padding: 0 1.9em;
+          }
+
+          &:nth-child(6) {
+            @include TdWidth(6.7em);
+            padding: 0 1.6em;
+          }
+
+          &:nth-child(7) {
+            @include TdWidth(7.8em);
+            padding: 0 1.3em;
+          }
+
+          &:nth-child(8) {
+            @include TdWidth(8.4em);
+            padding: 0 1.3em;
+          }
+
+          &:nth-child(9) {
+            @include TdWidth(4.3em);
+            text-align: center;
+          }
+
+          &:nth-child(10) {
+            @include TdWidth(13.4em);
+            padding: 0 1.8em;
+          }
+        }
+      }
+    }
+
+    .#{$sidebarBoxClassName} {
+      vertical-align: top;
+      @include TdWidth(14.33em);
+    }
+  }
+
+  .#{$headingBoxClassName} {
+    .#{$sidebarBoxClassName} {
+      @include BgIconGearPlaced($Color-SilverChalice, NewRect(95%, 50%, 1.28em, 1.28em));
+    }
+  }
+
+  .#{$contentBoxClassName} {
+    .mainBox {
+      border-right: 1px solid $Color-DustyGray;
+
+      #CalA {
+        height: 100%;
+        overflow-y: auto;
+
+        #btnPrevWeek, #btnNextWeek{
+          display: none;
+        }
+
+        .#{$datagridMainClassName} {
+          tr {
+            &.dialogForeground {
+              display: none;
+            }
+
+            &:nth-child(n+2) {
+              height: 3em;
+
+              td {
+                &:nth-child(n+3) {
+                  border-bottom: 1px solid $Color-Botticelli-B;
+                }
+
+                &:first-child {
+                  border-right: 2px solid $Color-PigeonPost;
+                }
+
+                &:nth-child(n+4) {
+                  border-left: 1px solid $Color-Botticelli;
+                }
+
+                &:nth-child(n+#{$ColsCFirst}):nth-child(-n+#{$ColsCLast}) {
+                  color: $Color-MineShaft;
+                }
+
+                &:nth-child(n+#{$ColsDFirst}):nth-last-child(n+#{$ColsDLastFromBack}) {
+                  color: $Color-Scorpion;
+                }
+
+                &:nth-last-child(-n+#{$ColsELastFromBack}) {
+                  color: $Color-MineShaft;
+                }
+
+                &:nth-child(5) {
+                  font-style: italic;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .#{$sidebarBoxClassName} {
+      padding: 0 0.6em;
+
+      .sidebar {
+        > tbody {
+          > tr {
+            &.sidebarHeading {
+              display: none;
+            }
+
+            &.calendarBox {
+              .selectedDate {
+                display: none;
+              }
+
+              #divSchedule {
+                @import 'HomePageSched.Calendar';
+              }
+            }
+
+            &.filtersBox {
+              .filters {
+                width: 100%;
+
+                .searchBox {
+                  position: relative;
+                  padding-bottom: 0.7em;
+
+                  .searchFieldBox {
+                    height: 1.8em;
+                    border-bottom: 1px solid $Color-PigeonPost-B;
+                    border-right: 1px solid $Color-PigeonPost-B;
+                    border-bottom-right-radius: 0.3em;
+
+                    .pageitemPicker {
+                      width: 100%;
+                      position: absolute;
+                      border: none;
+                      padding: 0 1.7em 0 0;
+                      font-style: italic;
+                      @include BgIconSearchPlaced($Color-StTropaz, NewRect(97%, 50%, 1em, 1em));
+                    }
+                  }
+
+                  .providerNameNeighbor {
+                    display: none;
+                  }
+                }
+
+                .doctorsBox {
+                  padding-bottom: 0.3em;
+
+                  .pageitemPicker {
+                    width: 100%;
+                    height: 16em;
+                  }
+                }
+
+                .modesBox {
+                  .preferencesBackground {
+                    width: 100%;
+
+                    .heading {
+                      display: none;
+                    }
+
+                    $regular-padding: 0.45em;
+                    $boudary-padding: 1em;
+
+                    $bgPlacementRect: NewRect(0.3em, 50%, 1.25em, 1.25em);
+
+                    #optDisplayType, #optViewType {
+                      width: 100%;
+                      border-bottom: 1px solid $Color-PigeonPost-B;
+
+                      tr {
+
+                        &:first-child td {
+                          padding-top: $boudary-padding;
+                        }
+
+                        &:last-child td {
+                          padding-bottom: $boudary-padding;
+                        }
+
+                        &:nth-child(n+2) td {
+                          padding-top: $regular-padding;
+                        }
+
+                        &:nth-last-child(n+2) td {
+                          padding-bottom: $regular-padding;
+                        }
+
+                        td {
+                          input[type=radio] {
+                            position: absolute;
+                            visibility: hidden;
+
+                            &:checked ~ label::before {
+                              @include BgIconRadioInner($Color-SanMarino);
+                            }
+                          }
+
+                          label {
+                            padding: 0.3em 0 0.3em 2em;
+                            position: relative;
+                            @include BgIconRadioOuter($Color-SanMarino);
+                            @include BgPlacement($bgPlacementRect);
+
+                            &::before {
+                              content: '';
+                              display: block;
+                              position: absolute;
+                              width: 100%;
+                              height: 100%;
+                              top: 0;
+                              @include BgPlacement($bgPlacementRect);
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    .cancelledItemsOptionBox {
+                      padding: $boudary-padding 0;
+
+                      input[type=checkbox] {
+                        position: absolute;
+                        visibility: hidden;
+
+                        &:checked ~ label::before {
+                          @include BgIconCheckboxInner($Color-SanMarino);
+                        }
+                      }
+
+                      label {
+                        padding: 0.3em 0 0.3em 2em;
+                        position: relative;
+                        @include BgIconCheckboxOuter($Color-SanMarino);
+                        @include BgPlacement($bgPlacementRect);
+
+                        &::before {
+                          content: '';
+                          display: block;
+                          position: absolute;
+                          width: 100%;
+                          height: 100%;
+                          top: 0;
+                          @include BgPlacement($bgPlacementRect);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            > td {
+              padding-top: 1.3em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #btnGridUpdate, #btnSign, #btnRefresh {
+    display: none;
+  }
+}

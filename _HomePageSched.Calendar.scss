@@ -1,0 +1,111 @@
+@import 'Colors';
+@import 'Icons/FromFont';
+
+.ui-widget-content {
+  border: 0;
+}
+
+.ui-datepicker {
+  font-size: inherit;
+  width: 100%;
+  padding: 0;
+  background: none;
+
+  .ui-datepicker-header {
+    border: 0;
+    background: none;
+    margin-bottom: 0.9em;
+
+    a {
+      width: 1.3em;
+      height: 100%;
+      top: 0;
+
+      @mixin BgIconPlacement() {
+        background-position: 50% 50%;
+        background-size: 0.67em 0.94em;
+      }
+
+      &.ui-datepicker-prev {
+        left: 0;
+        @include BgIconPlacement();
+        @include BgIconChevronLeft($Color-PoloBlue);
+
+        &:hover {
+          @include BgIconChevronLeft($Color-SanMarino);
+          background-color: transparent;
+        }
+      }
+
+      &.ui-datepicker-next {
+        right: 0;
+        @include BgIconPlacement();
+        @include BgIconChevronRight($Color-PoloBlue);
+
+        &:hover {
+          @include BgIconChevronRight($Color-SanMarino);
+          background-color: transparent;
+        }
+      }
+
+      .ui-icon {
+        display: none;
+      }
+    }
+
+    .ui-datepicker-title {
+      margin: 0 1.7em;
+
+      select {
+        font-size: 1.05em;
+        margin: 0 0.4em;
+        border: none;
+
+        &.ui-datepicker-month {
+          width: 38%;
+        }
+
+        &.ui-datepicker-year {
+          width: 45%;
+        }
+      }
+    }
+  }
+
+  table {
+    font-size: inherit;
+    background-color: $Color-Concrete;
+
+    thead {
+      tr {
+        th {
+          font-weight: initial;
+          padding: 0.4em 0 0.23em 0;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          width: 1%;
+
+          a {
+            font-size: 0.8em;
+            text-align: center;
+            height: 2.15em;
+            padding-top: 0.4em;
+            border-radius: 3px;
+            background: $Color-Solitude;
+            border-color: $Color-HippieBlue;
+
+            &:hover, &.ui-state-active {
+              color: $Color-WildSand;
+              background: $Color-SanMarino;
+            }
+          }
+        }
+      }
+    }
+  }
+}
